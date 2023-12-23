@@ -28,7 +28,7 @@ public class AppointmentController {
         }
     }
     @PostMapping("/save")
-    ResponseEntity<AppointmentDto> saveAppointment(@RequestBody Appointment appointment){
+    ResponseEntity<Appointment> saveAppointment(@RequestBody Appointment appointment){
         appointmentService.save(appointment);
         return ResponseEntity.ok().build();
     }
