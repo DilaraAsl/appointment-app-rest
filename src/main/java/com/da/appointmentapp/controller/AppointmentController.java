@@ -34,14 +34,6 @@ public class AppointmentController {
         Appointment savedAppointment=appointmentService.save(appointment);
         return ResponseEntity.ok(savedAppointment);
     }
-//    @DeleteMapping("/delete/{id}")
-//    ResponseEntity<String> deleteAppointment(@PathVariable("id")Long id){
-//        if(id==null){
-//            return ResponseEntity.notFound().build();
-//        }
-//        appointmentService.delete(id);
-//        return ResponseEntity.ok().body("Appointment id:"+id+" deleted successfully!");
-//    }
 @DeleteMapping("/delete/{id}")
 ResponseEntity<Map<String, String>> deleteAppointment(@PathVariable("id") Long id) {
     if (id == null) {
