@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,7 +31,27 @@ public class AppointmentController {
     }
     @PostMapping("/save")
     ResponseEntity<Appointment> saveAppointment(@RequestBody Appointment appointment){
-        appointmentService.save(appointment);
-        return ResponseEntity.ok().build();
+        Appointment savedAppointment=appointmentService.save(appointment);
+        return ResponseEntity.ok(savedAppointment);
     }
+//    @DeleteMapping("/delete/{id}")
+//    ResponseEntity<String> deleteAppointment(@PathVariable("id")Long id){
+//        if(id==null){
+//            return ResponseEntity.notFound().build();
+//        }
+//        appointmentService.delete(id);
+//        return ResponseEntity.ok().body("Appointment id:"+id+" deleted successfully!");
+//    }
+@DeleteMapping("/delete/{id}")
+ResponseEntity<Map<String, String>> deleteAppointment(@PathVariable("id") Long id) {
+    if (id == null) {
+        return ResponseEntity.notFound().build();
+    }
+    System.out.println("Deleting appointment with ID: " + id);
+    appointmentService.delete(id);
+
+    Map<String, String> response = Collections.singletonMap("message", "Appointment id:" + id + " deleted successfully!");
+    return ResponseEntity.ok().body(response);
+}
+
 }

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface AppointmentService {
     List<Appointment> getAllAppointments();
-    void save(Appointment appointment);
+    Appointment save(Appointment appointment);
+    void delete(Long id);
 }
